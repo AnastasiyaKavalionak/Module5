@@ -1,0 +1,9 @@
+{
+  "name": "jasmine-test",
+  "version": "1.0.0",
+  "author": "Anastasiya Kavalionak",
+  "license": "ISC",
+  "devDependencies": {
+    "protractor": "^5.2.0"
+  }
+}
