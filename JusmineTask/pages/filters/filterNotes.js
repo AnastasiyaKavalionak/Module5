@@ -6,9 +6,9 @@ class FilterNotes {
 
         this['Name'] = element(by.css('.ellipsis'));
         this['On/Off'] = element(by.css('.settingsFilters-sort-toggle'));
-        this['Edit'] = element.all(by.css('.settingsFilters-sort-toggle button')).get(0);
-        this['Edit sieve'] = element.all(by.css('.settingsFilters-sort-toggle button')).get(1);
-        this['Delete'] = element.all(by.css('.settingsFilters-sort-toggle button')).get(2);
+        this['Edit'] = element(by.css('.as-sortable-item-handle button:nth-of-type(1)'));
+        this['Edit sieve'] = element(by.css('.as-sortable-item-handle button:nth-of-type(2)'));
+        this['Delete'] = element(by.css('.as-sortable-item-handle button:nth-of-type(3)'));
     }
 }
 

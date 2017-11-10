@@ -9,11 +9,11 @@ class Filters {
 
         this.url = 'https://mail.protonmail.com/filters';
 
-        this['Filter Add'] = element.all(by.css('.settingsFilters-actions-buttons')).get(0);
-        this['Add Sieve Filter'] = element.all(by.css('.settingsFilters-actions-buttons')).get(1);
+        this['Filter Add'] = element(by.css('.settingsFilters-actions-buttons button'));
+        this['Add Sieve Filter'] = element(by.css('.settingsFilters-actions-buttons button:nth-of-type(2)'));
         this['Custom Filters'] = new FilterNotes();
-        this['No Filters'] = element.all(by.css('.setting p')).get(2);
-        this['No More Filters'] = element.all(by.css('.setting p')).get(1);
+        this['No Filters'] = element(by.css('.setting p:nth-of-type(3)'));
+        this['No More Filters'] = element(by.css('.setting p:nth-of-type(2)'));
 
         this['Learn More'] = element(by.css('a[href*="knowledge-base"]'));
         this['Search'] = element(by.css('.search'));

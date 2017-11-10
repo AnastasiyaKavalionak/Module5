@@ -2,88 +2,117 @@
 
 const EC = protractor.ExpectedConditions;
 const Filters = require('../pages/filters/filters');
+const Login = require('../pages/login');
+const PopUp = require('../pages/filters/popUp');
+const EHelper = require('../helpers/element.helper');
+const BHelper = require('../helpers/browser.helper');
+let login = new Login();
 let filters = new Filters();
+let popUp = new PopUp();
 
-describe ('filters page', () => {
+beforeAll(() => {
+    BHelper.openPage(login.url)
+        .then(BHelper.wait(login.username))
+        .then(EHelper.sendKeys(login.username, 'AnastasiyaTest'))
+        .then(EHelper.sendKeys(login.password, 'Qwerty123'))
+        .then(EHelper.click(login['Login button']))
+        .then(BHelper.wait(login['Settings button']))
+        .then(EHelper.click(login['Settings button']))
+        .then(BHelper.wait(login['Filters button']))
+        .then(EHelper.click(login['Filters button']))
+        .then(browser.angularAppRoot('body'));
+});
 
-    beforeAll(() => {
-        browser.get('https://mail.protonmail.com/login');
+afterEach(() => {
+    EHelper.deleteAllNotes(filters.Whitelist.Delete)
+        .then(EHelper.deleteAllNotes(filters.Blacklist.Delete));
+});
 
-        browser.wait(EC.visibilityOf(element(by.css('#username'))));
-        element(by.css('#username')).sendKeys('AnastasiyaTest');
-        element(by.css('#password')).sendKeys('Qwerty123');
-        element(by.css('#login_btn')).click();
+afterAll(() => {
+    //browser.sleep(2000);
+});
 
-        browser.wait(EC.visibilityOf(element(by.css('#tour-settings'))));
-        element(by.css('#tour-settings')).click();
+describe('filters page', () => {
 
-        browser.wait(EC.visibilityOf(element(by.css('a[data-state="filters"'))));
-        element(by.css('a[data-state="filters"]')).click();
+    it('adding into whitelist', () => {
+
+        BHelper.wait(filters['Whitelist Add']);
+        EHelper.click(filters['Whitelist Add']);
+
+        BHelper.wait(popUp.textfield);
+        EHelper.sendKeys(popUp.textfield, 'bycaffca@gmail.com');
+        EHelper.click(popUp.save);
+
+        BHelper.wait(filters.Whitelist.Email.get(0));
+        EHelper.isInList(filters.Whitelist.Email, 'bycaffca@gmail.com', true);
     });
 
-    it ('adding into whitelist', () => {
+    it('adding into blacklist', () => {
 
-        browser.wait(EC.visibilityOf(element(by.css('#whitelist .pm_button'))));
-        element(by.css('#whitelist .pm_button')).click();
+        BHelper.wait(filters['Blacklist Add']);
+        EHelper.click(filters['Blacklist Add']);
 
-        browser.wait(EC.visibilityOf(element(by.css('#emailAddress'))));
-        element(by.css('#emailAddress')).sendKeys('bycaffca@gmail.com');
-        element.all(by.css('.modal-footer button')).get(1).click();
+        BHelper.wait(popUp.textfield);
+        EHelper.sendKeys(popUp.textfield, 'bycaffca@inbox.ru');
+        EHelper.click(popUp.save);
 
-        browser.wait(EC.visibilityOf(element(by.css('#whitelist .blocklist-email-value'))));
-        expect(element.all(by.css('#whitelist .blocklist-email-value')).first().getText()).toEqual('bycaffca@gmail.com');
+        BHelper.wait(filters.Blacklist.Email.get(0));
+        EHelper.isInList(filters.Blacklist.Email, 'bycaffca@inbox.ru', true);
     });
 
-    it ('adding into blacklist', () => {
+    describe('whitelist: test of switch and delete buttons', () => {
+        beforeEach(() => {
+            BHelper.wait(filters['Whitelist Add'])
+                .then(EHelper.click(filters['Whitelist Add']))
+                .then(BHelper.wait(popUp.textfield))
+                .then(EHelper.sendKeys(popUp.textfield, 'bycaffca@gmail.com'))
+                .then(EHelper.click(popUp.save));
+        });
 
-        browser.wait(EC.visibilityOf(element(by.css('#blacklist .pm_button'))));
-        element(by.css('#blacklist .pm_button')).click();
+        it('whitelist switch', () => {
 
-        browser.wait(EC.visibilityOf(element(by.css('#emailAddress'))));
-        element(by.css('#emailAddress')).sendKeys('bycaffca@inbox.com');
-        element.all(by.css('.modal-footer button')).get(1).click();
+            BHelper.wait(filters.Whitelist.Switch.first());
+            EHelper.click(filters.Whitelist.Switch.first());
 
-        browser.wait(EC.visibilityOf(element(by.css('#blacklist .blocklist-email-value'))));
-        expect(element.all(by.css('#blacklist .blocklist-email-value')).first().getText()).toEqual('bycaffca@inbox.com');
+            BHelper.wait(filters.Blacklist.Email.first());
+            EHelper.isInList(filters.Blacklist.Email, 'bycaffca@gmail.com', true);
+        });
+
+        it('whitelist delete', () => {
+
+            BHelper.wait(filters.Whitelist.Delete.first());
+            EHelper.click(filters.Whitelist.Delete.first());
+
+            BHelper.wait(filters['Whitelist No Emails']);
+            EHelper.isInList(filters.Whitelist.Email, 'bycaffca@gmail.com', false);
+        });
     });
 
-    it ('whitelist switch', () => {
+    describe('blacklist: test of switch and delete buttons', () => {
+        beforeEach(() => {
+            BHelper.wait(filters['Blacklist Add'])
+                .then(EHelper.click(filters['Blacklist Add']))
+                .then(BHelper.wait(popUp.textfield))
+                .then(EHelper.sendKeys(popUp.textfield, 'bycaffca@inbox.ru'))
+                .then(EHelper.click(popUp.save));
+        });
 
-        browser.wait(EC.visibilityOf(element(by.css('#whitelist button[data-original-title="Switch"]'))));
-        let email = element.all(by.css('#whitelist .blocklist-email-value')).first().getText().then((res) => res);
-        element.all(by.css('#whitelist button[data-original-title="Switch"]')).first().click();
+        it('blacklist switch', () => {
 
-        browser.wait(EC.visibilityOf(element(by.css('#blacklist .blocklist-email-value'))));
-        expect(element.all(by.css('#blacklist .blocklist-email-value')).last().getText()).toEqual(email);
+            BHelper.wait(filters.Blacklist.Switch.first());
+            EHelper.click(filters.Blacklist.Switch.first());
+
+            BHelper.wait(filters.Whitelist.Email.first());
+            EHelper.isInList(filters.Whitelist.Email, 'bycaffca@inbox.ru', true);
+        });
+
+        it('blacklist delete', () => {
+
+            BHelper.wait(filters.Blacklist.Delete.first());
+            EHelper.click(filters.Blacklist.Delete.first());
+
+            BHelper.wait(filters['Blacklist No Emails']);
+            EHelper.isInList(filters.Blacklist.Email, 'bycaffca@inbox.ru', false);
+        });
     });
-
-    it ('blacklist switch', () => {
-
-        browser.wait(EC.visibilityOf(element(by.css('#blacklist button[data-original-title="Switch"]'))));
-        let email = element.all(by.css('#blacklist .blocklist-email-value')).first().getText().then((res) => res);
-        element.all(by.css('#blacklist button[data-original-title="Switch"]')).first().click();
-
-        browser.wait(EC.visibilityOf(element(by.css('#whitelist .blocklist-email-value'))));
-        expect(element.all(by.css('#whitelist .blocklist-email-value')).last().getText()).toEqual(email);
-    });
-
-    it ('adding filters', () => {
-
-        browser.wait(EC.visibilityOf(element.all(by.css('.settingsFilters-actions-buttons')).get(0)));
-        element.all(by.css('.settingsFilters-actions-buttons')).get(0).click();
-
-        browser.wait(EC.visibilityOf(element(by.css('#filterName'))));
-        element(by.css('#filterName')).sendKeys('filter1');
-        element(by.css('.filter-modal-condition-settings select')).click();
-        element(by.css('option[label="the sender"]')).click();
-        browser.wait(EC.visibilityOf(element(by.css('#autocomplete'))));
-        element(by.css('#autocomplete')).sendKeys('bycaffca');
-        element.all(by.css('.customCheckbox-input')).get(1).click();
-        browser.wait(EC.visibilityOf(element(by.css('.customRadio-input'))));
-        element.all(by.css('.customRadio-input')).get(1).click();
-        element.all(by.css('modal-footer button')).get(1).click();
-
-        browser.wait(EC.visibilityOf(element(by.css('ellipsis'))));
-        expect(element(by.css('ellipsis')).getText()).toEqual('filter1');
-    })
 });
