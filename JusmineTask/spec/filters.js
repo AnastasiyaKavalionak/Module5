@@ -6,9 +6,12 @@ const Login = require('../pages/login');
 const PopUp = require('../pages/filters/popUp');
 const EHelper = require('../helpers/element.helper');
 const BHelper = require('../helpers/browser.helper');
+const Reporter = require('../reporter/reporter');
 let login = new Login();
 let filters = new Filters();
 let popUp = new PopUp();
+
+jasmine.getEnv().addReporter(Reporter);
 
 beforeAll(() => {
     BHelper.openPage(login.url)
@@ -29,7 +32,7 @@ afterEach(() => {
 });
 
 afterAll(() => {
-    //browser.sleep(2000);
+    browser.sleep(2000);
 });
 
 describe('filters page', () => {

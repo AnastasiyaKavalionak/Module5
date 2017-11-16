@@ -1,7 +1,7 @@
 'use strict';
 
 function sendKeys(element, keys) {
-
+//+clear
     return element.sendKeys(keys);
 }
 
