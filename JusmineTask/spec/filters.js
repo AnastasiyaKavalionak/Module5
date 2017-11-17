@@ -7,10 +7,13 @@ const PopUp = require('../pages/filters/popUp');
 const EHelper = require('../helpers/element.helper');
 const BHelper = require('../helpers/browser.helper');
 const Reporter = require('../reporter/reporter');
+const path = require('path');
 let login = new Login();
 let filters = new Filters();
 let popUp = new PopUp();
 
+Reporter.dir = './output';
+Reporter.test = path.basename(__filename, '.js');
 jasmine.getEnv().addReporter(Reporter);
 
 beforeAll(() => {
@@ -32,7 +35,7 @@ afterEach(() => {
 });
 
 afterAll(() => {
-    browser.sleep(2000);
+    browser.sleep(100);
 });
 
 describe('filters page', () => {
@@ -106,7 +109,7 @@ describe('filters page', () => {
             EHelper.click(filters.Blacklist.Switch.first());
 
             BHelper.wait(filters.Whitelist.Email.first());
-            EHelper.isInList(filters.Whitelist.Email, 'bycaffca@inbox.ru', true);
+            EHelper.isInList(filters.Whitelist.Email, 'abycaffca@inbox.ru', true);
         });
 
         it('blacklist delete', () => {

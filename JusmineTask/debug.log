@@ -13,3 +13,33 @@
 [1110/132802.275:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
 [1110/132802.275:ERROR:exception_snapshot_win.cc(87)] thread ID 11612 not found in process
 [1110/132802.275:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
+[1117/094209.179:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[1117/094209.210:ERROR:exception_snapshot_win.cc(87)] thread ID 7200 not found in process
+[1117/094209.210:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
+[1117/095928.581:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[1117/095928.596:ERROR:exception_snapshot_win.cc(87)] thread ID 7404 not found in process
+[1117/095928.596:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
+[1117/105608.113:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[1117/105608.115:ERROR:exception_snapshot_win.cc(87)] thread ID 3956 not found in process
+[1117/105608.115:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
+[1117/111421.745:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1117/111421.747:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1117/111421.747:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1117/111421.747:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[1117/111421.747:ERROR:exception_snapshot_win.cc(87)] thread ID 6404 not found in process
+[1117/111421.747:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
+[1117/113147.791:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[1117/113147.795:ERROR:exception_snapshot_win.cc(87)] thread ID 2752 not found in process
+[1117/113147.795:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
+[1117/113147.794:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[1117/113147.797:ERROR:exception_snapshot_win.cc(87)] thread ID 6452 not found in process
+[1117/113147.797:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
+[1117/114128.887:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[1117/114128.889:ERROR:exception_snapshot_win.cc(87)] thread ID 2688 not found in process
+[1117/114128.889:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
+[1117/133809.259:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[1117/133809.262:ERROR:exception_snapshot_win.cc(87)] thread ID 4724 not found in process
+[1117/133809.262:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
+[1117/134253.266:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[1117/134253.269:ERROR:exception_snapshot_win.cc(87)] thread ID 5636 not found in process
+[1117/134253.269:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
